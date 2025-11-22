@@ -1,5 +1,9 @@
 package hashmap;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+
 // 2215. Find the Difference of Two Arrays
 // Given two 0-indexed integer arrays nums1 and nums2, return a list answer of size 2 where:
 // answer[0] is a list of all distinct integers in nums1 which are not present in nums2.
@@ -27,5 +31,44 @@ package hashmap;
 
 
 public class LeetCode2215 {
-    
+        public List<List<Integer>> findDifference(int[] nums1, int[] nums2) {
+        List<List<Integer>> answer = new ArrayList<>();
+        HashSet<Integer> nums1_set = new HashSet<>();
+        HashSet<Integer> nums2_set = new HashSet<>();
+        List<Integer> nums1_temp = new ArrayList<>();
+        List<Integer> nums2_temp = new ArrayList<>();
+
+        for (int i = 0; i < nums1.length; i++) {
+            nums1_set.add(nums1[i]);
+        }
+
+        for (int i = 0; i < nums2.length; i++) {
+            nums2_set.add(nums2[i]);
+        }
+
+        int i = 0;
+        while (i < nums1.length) {
+            if (!nums2_set.contains(nums1[i]) && !nums1_temp.contains(nums1[i]) ) {
+                nums1_temp.add(nums1[i]);
+            }
+            i++;
+        }
+
+        answer.add(nums1_temp);
+
+        int j = 0;
+        while (j < nums2.length) {
+            if (!nums1_set.contains(nums2[j]) && !nums2_temp.contains(nums2[j])) {
+                nums2_temp.add(nums2[j]);
+            }
+            j++;
+        }
+
+        answer.add(nums2_temp);
+        
+        return answer;
+    }
 }
+
+// time compelxity: O(N)
+// space complexity: O(N)
