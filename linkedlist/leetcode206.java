@@ -36,6 +36,7 @@ import java.util.List;
 
 
 public class leetcode206 {
+    // iterative approach
     public ListNode reverseList(ListNode head) {
     if (head == null) {
         return head;
@@ -65,6 +66,41 @@ public class leetcode206 {
 
     return newHead;
 }
+
+
+    // recursive approach
+    public ListNode reverseListrecursive(ListNode head) {
+        List<Integer> arrayList = new ArrayList<>();
+        traverse(head, arrayList);
+        List<Integer> reversed_arrayList = reverse(arrayList);
+        ListNode newHead = null;
+        ListNode current = null; 
+        return createList(reversed_arrayList, 0); 
+    }
+
+    private void traverse(ListNode head, List arrayList) {
+        if (head == null) return;
+        arrayList.add(head.val); 
+        traverse(head.next, arrayList);
+    }
+
+    private List<Integer> reverse(List<Integer> arrayList) {
+        List<Integer> reverseList = new ArrayList<>();
+        for (int i = arrayList.size() - 1; i >= 0; i--) {
+            reverseList.add(arrayList.get(i));
+        }
+        return reverseList;
+    }
+
+    private ListNode createList(List<Integer> arrayList, int index) {
+        if (index == arrayList.size()) {
+            return null; 
+        }
+
+        ListNode node = new ListNode(arrayList.get(index));
+        node.next = createList(arrayList, index + 1);
+        return node;
+    }
 
 
 public class ListNode {
