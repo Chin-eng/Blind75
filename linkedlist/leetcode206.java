@@ -67,6 +67,23 @@ public class leetcode206 {
     return newHead;
 }
 
+//optimal solution
+    public ListNode reverseListOptimal(ListNode head) {
+
+        ListNode curr = head;
+        ListNode prev = null;
+        ListNode next = null;
+        
+        while (curr != null) {
+            next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
+        }
+
+        return prev;
+    }
+
 
     // recursive approach
     public ListNode reverseListrecursive(ListNode head) {
