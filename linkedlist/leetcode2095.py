@@ -31,3 +31,22 @@ class Solution:
 
         return head
     
+# fast and slow pointers
+class Solution:
+    def deleteMiddle(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        slow = head
+        fast = head
+        preslow = None
+
+        if fast.next == None:
+            return None
+
+        while fast and fast.next:
+            preslow = slow
+            slow = slow.next
+            fast = fast.next.next
+
+        preslow.next = slow.next
+
+        return head
+        
