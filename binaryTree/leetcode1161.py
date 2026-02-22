@@ -5,20 +5,19 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
-
+    def maxLevelSum(self, root: Optional[TreeNode]) -> int:
+        
         if not root:
-            return []
+            return -1
 
         queue = []
-        res = []
-
         queue.append(root)
+        my_map = []
+        level = 1
 
         while queue:
             queue_length = len(queue)
             temp = []
-            
             for _ in range(queue_length):
                 node = queue.pop(0)
                 temp.append(node.val)
@@ -27,7 +26,11 @@ class Solution:
                     queue.append(node.left)
                 if node.right:
                     queue.append(node.right)
+
+            my_map.append(sum(temp))
+            level += 1
             
-            res.append(temp[-1])
-        
-        return res
+        maxVal = float("-inf")
+        for val in my_map:
+            maxVal = max(maxVal, val)
+        return my_map.index(maxVal) + 1
