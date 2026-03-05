@@ -17,24 +17,37 @@ class Solution:
         else:
             if not root.left and not root.right:
                 return None
-            elif root.left:
+            elif not root.right and root.left:
                 return root.left
-            elif root.right:
+            elif not root.left and root.right:
                 return root.right
             else:
                 node = self.rightSubTreeMin(root.right)
-                root.val = node.val
-                root.right = self.deleteNode(root.right, node.val)
-                return root
+                if node:
+                    root.val = node.val
+                    root.right = self.deleteNode(root.right, node.val)
+                    return root
 
         return root
 
 
     def rightSubTreeMin(self, node: Optional[TreeNode]) -> Optional[TreeNode]:
 
+        if not node:
+            return None
+
         if not node.left and not node.right:
+            return node
+
+        if not node.left and node.right:
             return node
 
         minNode = self.rightSubTreeMin(node.left)
 
         return minNode
+
+
+
+
+
+        
